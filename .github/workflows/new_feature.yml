@@ -1,0 +1,72 @@
+name: Execution de notre pipeline CI/CD
+
+on:
+  push: 
+   branches:
+    - 'main'
+  pull_request:
+    branches:
+     - 'main'
+jobs:
+  Execution_pipeline:
+   runs-on: ubuntu-latest
+#test
+   steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+       node-version: 16.18
+    - name: Installation des Dependences
+      run: |
+          npm install
+          npm ci
+    - name: Installation de Docker compose
+      run: npm install -g docker-compose
+    - name: Revue automatique des codes
+      run: |
+          # Exécuter de l'outil de révision automatique ESLint
+          #Installation du package Eslint
+          npm run lint
+      continue-on-error: false
+    - name: Execution des tests automatisés
+      run: npm test
+      continue-on-error: false
+
+    - name: Execution de ESLint et sauvegarde du rapport dans un fichier .js
+      run: |
+        npx eslint src/myApp.js --format json --output-file eslint-report.js
+
+    - name: Generer le rapport ESlint
+      uses: actions/upload-artifact@v2
+      with:
+        name: eslint-report
+        path: eslint-report.js
+
+    - name: Construction de l'image Docker 
+      run: |
+          # Construire l'image Docker
+          docker buildx build -t https://github.com/jsaintpreux85/github_actions_automated_testing.git
+      continue-on-error: false
+
+   #Envoi d'un mail au contributeur en cas d'echec d'un job  
+  Notification_par_mail:
+   runs-on: ubuntu-latest
+   needs: Execution_pipeline
+   if: failure()
+   steps:
+    - name: Envoi mail
+      uses: actions/checkout@v3
+      with:    
+         server_address: smtp.gmail.com
+         # Optional port (defaults to 465)
+         server_port: 465
+         username: saintpreuxjerry
+         password: ${{secrets.NOTIFY_PASSWORD}}
+         sender: Jerry Saint-Preux
+         from: saintpreuxjerry@gmail.com
+         to: djlotbo@gmail.com
+         subject: Github Actions Test mail
+         body: This is a test email sent from GitHub Actions.
+         contentType: text/plain
