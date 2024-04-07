@@ -16,8 +16,9 @@ jobs:
       uses: actions/checkout@v2
     - name: Install CodeScene CLI
       run: |
-        npm install -g codescene-cli
-        codescene --version
+          wget https://downloads.codescene.io/cli/latest/linux/codescene.tar.gz
+          tar -xzvf codescene.tar.gz
+          chmod +x codescene/bin/codescene
 
     - name: Run CodeScene Analysis
       env:
