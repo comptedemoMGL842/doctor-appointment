@@ -14,15 +14,15 @@ jobs:
    steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Install CodeScene CLI
-      run: |
-         curl https://downloads.codescene.io/enterprise/cli/install-codescene-cli.sh | sh
+  #  - name: Install CodeScene CLI
+   #   run: |
+     #    curl https://downloads.codescene.io/enterprise/cli/install-codescene-cli.sh | sh
 
-    - name: Run CodeScene Analysis
-      env:
-        CODESCENE_TOKEN: ${{ secrets.CODE_SCENE_KEY }}
-      run: |
-        codescene analyze --project MyProject --branch main --base origin/main
+    #- name: Run CodeScene Analysis
+   #   env:
+    #    CODESCENE_TOKEN: ${{ secrets.CODE_SCENE_KEY }}
+     # run: |
+       # codescene analyze --project MyProject --branch main --base origin/main
 
     - name: Setup Node
       uses: actions/setup-node@v2
