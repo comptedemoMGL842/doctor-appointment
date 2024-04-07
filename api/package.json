@@ -10,9 +10,6 @@
     "build": "tsc && copyfiles -u 1 template/* dist/template",
     "lint:fix": "eslint . --fix",
     "postinstall": "prisma generate",
-    "prettier:check": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
-    "prettier:fix": "prettier --write .",
-    
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ujjal",
@@ -55,7 +52,6 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^5.0.0",
     "npm": "^9.8.0",
-    "prettier": "^3.0.0",
     "prisma": "^5.6.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.2"
