@@ -36,7 +36,7 @@ jobs:
 
     - name: Execution de ESLint et sauvegarde du rapport dans un fichier .js
       run: |
-        npx eslint src/myApp.js --format json --output-file eslint-report.js
+        npx eslint src/index.js --format json --output-file eslint-report.js
 
     - name: Generer le rapport ESlint
       uses: actions/upload-artifact@v2
@@ -63,7 +63,7 @@ jobs:
          # Optional port (defaults to 465)
          server_port: 465
          username: saintpreuxjerry
-         password: ${{secrets.NOTIFY_PASSWORD}}
+         password: Varnette19841985
          sender: Jerry Saint-Preux
          from: saintpreuxjerry@gmail.com
          to: djlotbo@gmail.com
