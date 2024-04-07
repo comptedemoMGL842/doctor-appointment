@@ -32,7 +32,7 @@ jobs:
       run: |
           npm install
           npm ci
-    #- name: Installation de Docker compose
+   #- name: Installation de Docker compose
     #  run: npm install -g docker-compose
     - name: Revue automatique des codes
       run: |
