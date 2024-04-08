@@ -32,8 +32,8 @@ jobs:
       run: |
           npm install
           npm ci
-   #- name: Installation de Docker compose
-    #  run: npm install -g docker-compose
+    - name: Installation de Docker compose
+      run: npm install -g docker-compose
     - name: Revue automatique des codes
       run: |
           # Exécuter de l'outil de révision automatique ESLint
